@@ -46,8 +46,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if collectionView == self.recentSearchCollectionView {
             let cell = self.recentSearchCollectionView.dequeueReusableCell(withReuseIdentifier: "RecentSearchCell", for: indexPath) as! RecentSearchCell
             
-            cell.stackView.layer.cornerRadius = cell.stackView.bounds.height/2
+            
             cell.searchText.text = Self.sampleRecentSearchList[indexPath.row]
+            
+            cell.bounds.size = CGSize(width: cell.stackView.bounds.width, height: 20)
+            cell.stackView.layer.cornerRadius = cell.stackView.bounds.height/2
+            
+            cell.layoutIfNeeded()
             
             return cell
         } else {
@@ -87,19 +92,19 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         if collectionView == self.realTimeRankingCollectionView {
+            
             let width = (collectionView.frame.width - 30 - 14 - 14) / 2
             let height = (collectionView.frame.height - (28 * 5)) / 5
             let size = CGSize(width: width, height: height)
             
             return size
+            
         } else {
             
-            let cell = self.recentSearchCollectionView.dequeueReusableCell(withReuseIdentifier: "RecentSearchCell", for: indexPath) as! RecentSearchCell
-                
-                return CGSize(width: cell.stackView.bounds.width, height: 20)
-            
-            
+            return CGSize(width: 30, height: 20)
         }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
